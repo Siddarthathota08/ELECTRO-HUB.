@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Order Success • ElectroHub</title>
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <script defer src="assets/js/data.js"></script>
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <header class="header"><div class="container nav">
+  <a class="brand" href="index.html"><span class="logo"></span> ElectroHub</a>
+  <nav class="navlinks">
+    <a href="products.html">Products</a>
+    <a href="categories.html">Categories</a>
+    <a href="wishlist.html">Wishlist <span class="badge wish">0</span></a>
+    <a href="cart.html">Cart <span class="badge cart">0</span></a>
+    <a href="orders.html">Orders</a>
+    <a href="profile.html"><span class="user-name">Guest</span></a>
+  </nav>
+</div></header>
+  <main class="container">
+<section class="section card">
+  <h2>Thank you! 🎉</h2>
+  <p>Your order <span id="oid" class="kbd"></span> has been placed.</p>
+  <div class="row"><a class="btn" href="orders.html">View Orders</a><a class="btn ghost" href="products.html">Shop more</a></div>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', ()=>{
+  const url = new URL(location.href); oid.textContent = url.searchParams.get('id')||'-';
+});
+</script>
+</main>
+  <footer class="footer">
+  <div class="container">
+    <div class="row"><strong>ElectroHub</strong><span class="small">• Demo frontend (HTML/CSS/JS only)</span><span class="right small">© 2025</span></div>
+    <div class="small">Local demo using localStorage. Customize freely.</div>
+  </div>
+</footer>
+</body>
+</html>

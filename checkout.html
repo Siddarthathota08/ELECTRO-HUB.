@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Checkout • ElectroHub</title>
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <script defer src="assets/js/data.js"></script>
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <header class="header"><div class="container nav">
+  <a class="brand" href="index.html"><span class="logo"></span> ElectroHub</a>
+  <nav class="navlinks">
+    <a href="products.html">Products</a>
+    <a href="categories.html">Categories</a>
+    <a href="wishlist.html">Wishlist <span class="badge wish">0</span></a>
+    <a href="cart.html">Cart <span class="badge cart">0</span></a>
+    <a href="orders.html">Orders</a>
+    <a href="profile.html"><span class="user-name">Guest</span></a>
+  </nav>
+</div></header>
+  <main class="container">
+<section class="section">
+  <h2>Checkout</h2>
+  <div class="grid" style="grid-template-columns: 1.2fr .8fr;">
+    <div class="card">
+      <h3>Shipping</h3>
+      <div class="row"><input class="input" placeholder="Full Name" id="name"></div>
+      <div class="row"><input class="input" placeholder="Address" id="addr"></div>
+      <div class="row"><input class="input" placeholder="City" id="city"><input class="input" placeholder="Pincode" id="pin"></div>
+      <h3 style="margin-top:14px">Payment</h3>
+      <div class="row"><input class="input" placeholder="Card Number (demo)" id="card"></div>
+      <button class="btn" id="placeBtn">Place Order</button>
+      <div class="small">Demo checkout only. No real payments.</div>
+    </div>
+    <div class="card">
+      <h3>Summary</h3>
+      <div id="sum"></div>
+    </div>
+  </div>
+</section>
+<script>
+function renderSum(){
+  const items = App.cart(); let total=0;
+  if(items.length===0){ sum.innerHTML='<div class="notice">Cart is empty.</div>'; return; }
+  sum.innerHTML = items.map(i=>{ total+=i.line; return `<div class="row"><span>${i.name} × ${i.qty}</span><span class="right">${App.fmt(i.line)}</span></div>`}).join('')
+    + `<hr style="border-color:rgba(255,255,255,.08)"><div class="row"><strong>Total</strong><strong class="right">${App.fmt(total)}</strong></div>`;
+}
+document.addEventListener('DOMContentLoaded', ()=>{
+  renderSum();
+  placeBtn.onclick = ()=>{
+    const id = Math.floor(Math.random()*1e8).toString(36);
+    const order = { id, at: new Date().toISOString(), items: App.cart() };
+    const orders = JSON.parse(localStorage.getItem('eh_orders')||'[]'); orders.push(order);
+    localStorage.setItem('eh_orders', JSON.stringify(orders));
+    localStorage.removeItem('eh_cart');
+    location.href = 'order-success.html?id='+id;
+  };
+});
+</script>
+</main>
+  <footer class="footer">
+  <div class="container">
+    <div class="row"><strong>ElectroHub</strong><span class="small">• Demo frontend (HTML/CSS/JS only)</span><span class="right small">© 2025</span></div>
+    <div class="small">Local demo using localStorage. Customize freely.</div>
+  </div>
+</footer>
+</body>
+</html>

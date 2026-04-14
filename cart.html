@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Cart • ElectroHub</title>
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <script defer src="assets/js/data.js"></script>
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <header class="header"><div class="container nav">
+  <a class="brand" href="index.html"><span class="logo"></span> ElectroHub</a>
+  <nav class="navlinks">
+    <a href="products.html">Products</a>
+    <a href="categories.html">Categories</a>
+    <a href="wishlist.html">Wishlist <span class="badge wish">0</span></a>
+    <a href="cart.html">Cart <span class="badge cart">0</span></a>
+    <a href="orders.html">Orders</a>
+    <a href="profile.html"><span class="user-name">Guest</span></a>
+  </nav>
+</div></header>
+  <main class="container">
+<section class="section">
+  <h2>Your Cart</h2>
+  <div id="cartWrap"></div>
+  <div class="row" style="margin-top:200px">
+    <a class="btn ghost" href="products.html">Continue Shopping</a>
+    <a class="btn right" href="checkout.html" id="checkoutBtn">Checkout</a>
+  </div>
+</section>
+<script>
+function renderCart(){
+  const items = App.cart();
+  if(items.length===0){ cartWrap.innerHTML = '<div class="notice">Your cart is empty.</div>'; checkoutBtn.style.pointerEvents='none'; checkoutBtn.style.opacity='0.5'; return; }
+  let total=0;
+  cartWrap.innerHTML = `<table class="table"><thead><tr><th>Item</th><th>Price</th><th>Qty</th><th>Line</th><th></th></tr></thead><tbody>${
+    items.map(it=>{ total+=it.line; return `<tr>
+      <td class="flex"><img src="${it.image}" style="width:40px; height:40px"> ${it.name}</td>
+      <td>${App.fmt(it.price)}</td>
+      <td><input type="number" min="1" value="${it.qty}" style="width:70px" oninput="App.setQty(${it.id}, Number(this.value)); renderCart()"></td>
+      <td>${App.fmt(it.line)}</td>
+      <td><button class="btn ghost" onclick="App.removeFromCart(${it.id}); renderCart()">Remove</button></td>
+    </tr>`}).join('')
+  }</tbody></table><div class="row" style="justify-content:flex-end"><strong>Total: ${App.fmt(total)}</strong></div>`;
+  checkoutBtn.style.pointerEvents='auto'; checkoutBtn.style.opacity='1';
+}
+document.addEventListener('DOMContentLoaded', renderCart);
+</script>
+</main>
+  <footer class="footer">
+  <div class="container">
+    <div class="row"><strong>ElectroHub</strong><span class="small">• Demo frontend (HTML/CSS/JS only)</span><span class="right small">© 2025</span></div>
+    <div class="small">Local demo using localStorage. Customize freely.</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Home • ElectroHub</title>
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <script defer src="assets/js/data.js"></script>
+  <script defer src="assets/js/app.js"></script>
+</head>
+
+<body>
+  <header class="header"><div class="container nav">
+  <a class="brand" href="index.html"><span class="logo"></span> ElectroHub</a>
+  <nav class="navlinks">
+    <a href="products.html">Products</a>
+    <a href="categories.html">Categories</a>
+    <a href="wishlist.html">Wishlist <span class="badge wish">0</span></a>
+    <a href="cart.html">Cart <span class="badge cart">0</span></a>
+    <a href="orders.html">Orders</a>
+    <a href="profile.html"><span class="user-name">Guest</span></a>
+  </nav>
+</div></header>
+  <main class="container">
+<section class="hero">
+  <div class="hero-grid">
+    <div class="card">
+      <h2>Shop the latest electronics</h2>
+      <p class="small">Phones, laptops, audio gear, TVs, cameras & more.</p>
+      <div class="row" style="margin-top:10px">
+        <input id="searchBox" class="input" placeholder="Search products (e.g. laptop, TV)"/>
+        <select id="categorySelect" class="input" style="max-width:500px">
+          <option>All</option><option>Mobiles</option><option>Laptops</option>
+          <option>Audio</option><option>Televisions</option><option>Cameras</option>
+        </select>
+        
+      </div>
+    </div>
+    <div class="card">
+      <h3>Featured today</h3>
+      <div class="small">Fresh picks and trending items.</div>
+      <div class="row" style="margin-top:50px">
+        <a class="btn" href="products.html">Browse all</a>
+        <a class="btn ghost" href="categories.html">Explore categories</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div id="productGrid" class="grid"></div>
+</section>
+</main>
+  <footer class="footer">
+  <div class="container">
+    <div class="row"><strong>ElectroHub</strong><span class="small">• Demo frontend (HTML/CSS/JS only)</span><span class="right small">© 2025</span></div>
+    <div class="small">Local demo using localStorage. Customize freely.</div>
+  </div>
+</footer>
+</body>
+</html>

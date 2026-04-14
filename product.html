@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=2"/>
+  <title>Product • ElectroHub</title>
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <script defer src="assets/js/data.js"></script>
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <header class="header"><div class="container nav">
+  <a class="brand" href="index.html"><span class="logo"></span> ElectroHub</a>
+  <nav class="navlinks">
+    <a href="products.html">Products</a>
+    <a href="categories.html">Categories</a>
+    <a href="wishlist.html">Wishlist <span class="badge wish">0</span></a>
+    <a href="cart.html">Cart <span class="badge cart">0</span></a>
+    <a href="orders.html">Orders</a>
+    <a href="profile.html"><span class="user-name">Guest</span></a>
+  </nav>
+</div></header>
+  <main class="container">
+<section class="section card" id="productSection">
+  <div id="pname" style="font-size:22px; font-weight:800; margin-bottom:6px"></div>
+  <div class="small" id="pcat"></div>
+  <div class="row" style="margin-top:10px">
+    <div class="img" style="width: 260px;"><img id="pimg" style="max-width:100%; max-height:80%"/></div>
+    <div>
+      <div id="pprice" style="font-size:20px; font-weight:800"></div>
+      <div class="small" id="prating"></div>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" id="addCartBtn">Add to Cart</button>
+        <button class="btn ghost" id="addWishBtn">♥ Save</button>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', ()=>{
+  const url = new URL(location.href);
+  const id = Number(url.searchParams.get('id'));
+  const p = (window.PRODUCTS||[]).find(x=>x.id===id) || (window.PRODUCTS||[])[0];
+  if(!p) return;
+  pname.textContent = p.name; pcat.textContent = p.category;
+  pimg.src = p.image; pimg.alt = p.name;
+  pprice.textContent = App.fmt(p.price);
+  prating.textContent = `Rating ★ ${p.rating}`;
+  addCartBtn.onclick = ()=>App.addToCart(p.id);
+  addWishBtn.onclick = ()=>App.addToWish(p.id);
+});
+</script>
+</main>
+  <footer class="footer">
+  <div class="container">
+    <div class="row"><strong>ElectroHub</strong><span class="small">• Demo frontend (HTML/CSS/JS only)</span><span class="right small">© 2025</span></div>
+    <div class="small">Local demo using localStorage. Customize freely.</div>
+  </div>
+</footer>
+</body>
+</html>
